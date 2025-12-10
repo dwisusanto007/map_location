@@ -3,7 +3,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { LocationResult } from './types';
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_GOOGLE_MAPS_API_KEY';
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://34.101.188.206:3001';
 
 function App() {
   const [query, setQuery] = useState('');

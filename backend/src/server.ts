@@ -9,7 +9,10 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3005', 'http://34.101.188.206:3002', 'http://34.101.188.206:3005'],
+  credentials: true
+}));
 app.use(express.json());
 
 interface PlaceResult {
