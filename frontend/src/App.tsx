@@ -12,7 +12,7 @@ function App() {
   const [error, setError] = useState('');
   const [selectedResult, setSelectedResult] = useState<LocationResult | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<google.maps.Map | null>(null);
+  const mapInstanceRef = useRef<google.maps.Map | undefined>(undefined);
   const markersRef = useRef<google.maps.Marker[]>([]);
 
   useEffect(() => {
@@ -85,8 +85,14 @@ function App() {
     setSelectedResult(null);
 
     try {
+      console.log('Searching for:', query);
+      console.log('API URL:', `${API_BASE_URL}/api/search?query=${encodeURIComponent(query)}`);
+      
       const response = await fetch(`${API_BASE_URL}/api/search?query=${encodeURIComponent(query)}`);
       const data = await response.json();
+
+      console.log('Response status:', response.status);
+      console.log('Response data:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Search failed');
@@ -98,6 +104,7 @@ function App() {
         setResults(data.results);
       }
     } catch (err) {
+      console.error('Search error:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
@@ -147,6 +154,9 @@ function App() {
             >
               <div className="result-name">{result.name}</div>
               <div className="result-address">{result.formatted_address}</div>
+              {result.postal_code && (
+                <div className="result-postal">Zip/Postal Code: {result.postal_code}</div>
+              )}
               <div className="result-coords">
                 {result.latitude.toFixed(6)}, {result.longitude.toFixed(6)}
               </div>

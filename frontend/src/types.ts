@@ -4,4 +4,5 @@ export interface LocationResult {
   formatted_address: string;
   latitude: number;
   longitude: number;
+  postal_code: string;
 }
