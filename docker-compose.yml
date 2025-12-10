@@ -17,7 +17,7 @@ services:
       context: ./frontend
       args:
         - VITE_GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
-        - VITE_API_BASE_URL=http://localhost:3001
+        - VITE_API_BASE_URL=http://34.101.188.206:3001
     ports:
       - "3002:80"
     depends_on:
